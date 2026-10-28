@@ -1,0 +1,37 @@
+{
+  "name": "baronrobin",
+  "version": "1.0.0",
+  "description": "Robin Baron's terminal business card. Run `npx baronrobin`.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Robin Baron (https://baronrobin.com)",
+  "homepage": "https://baronrobin.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BaronRobin/baronrobin.git"
+  },
+  "bugs": "https://github.com/BaronRobin/baronrobin/issues",
+  "bin": {
+    "baronrobin": "bin/cli.mjs"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node bin/cli.mjs",
+    "test": "node --test"
+  },
+  "keywords": [
+    "portfolio",
+    "business-card",
+    "card",
+    "cli",
+    "npx",
+    "3d",
+    "robin-baron"
+  ]
+}
