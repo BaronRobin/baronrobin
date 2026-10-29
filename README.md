@@ -2,8 +2,6 @@
 curl -sL baronrobin.com/card.txt
 ```
 
-Prints this as text. Nothing is installed or run.
-
 ```
 ╭────────────────────────────────────────────────────────╮
 │                                                        │
