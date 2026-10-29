@@ -8,12 +8,14 @@ export const card = {
     "Unreal Engine, Houdini and real-time work,",
     "from arch viz to VFX and live event tech.",
   ],
+  // Each link opens on a click (cmd-click on a Mac) where the terminal knows OSC 8;
+  // href when the value isn't the address itself.
   links: [
     { label: "Web", value: "https://baronrobin.com" },
     { label: "GitHub", value: "https://github.com/BaronRobin" },
     { label: "LinkedIn", value: "https://www.linkedin.com/in/baron-robin" },
-    { label: "Email", value: "robinbaron@icloud.com" },
-    { label: "Instagram", value: "@phtorob" },
+    { label: "Email", value: "robinbaron@icloud.com", href: "mailto:robinbaron@icloud.com" },
+    { label: "Instagram", value: "@phtorob", href: "https://www.instagram.com/phtorob/" },
   ],
   skills: [
     "Unreal Engine",

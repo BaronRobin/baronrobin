@@ -68,3 +68,12 @@ test("cli rejects unknown options with exit code 2", () => {
   assert.equal(status, 2);
   assert.ok(stderr.includes("Unknown option"));
 });
+
+test("every link is an OSC 8 hyperlink with colour on, and none with colour off", () => {
+  const on = render(card, { color: true });
+  for (const l of card.links) {
+    const url = l.href ?? l.value;
+    assert.ok(on.includes(`\u001b]8;;${url}\u001b\\`), `missing link for ${l.label}`);
+  }
+  assert.ok(!render(card, { color: false }).includes("\u001b]8;;"));
+});

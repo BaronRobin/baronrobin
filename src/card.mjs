@@ -9,7 +9,8 @@ const CODES = {
   cyan: ["36", "39"],
 };
 
-const ANSI_PATTERN = /\u001b\[[0-9;]*m/g;
+// SGR codes (colour, bold) and OSC 8 hyperlinks: neither takes a column.
+const ANSI_PATTERN = /\u001b\[[0-9;]*m|\u001b\]8;;[^\u001b]*\u001b\\/g;
 
 export function stripAnsi(text) {
   return text.replace(ANSI_PATTERN, "");
@@ -46,6 +47,8 @@ export function render(data, { color = false, columns = Infinity } = {}) {
   const dim = style("dim");
   const underline = style("underline");
   const accent = style("cyan");
+  // OSC 8: the text becomes a link in terminals that support it, and stays plain text elsewhere.
+  const link = (text, url) => (color && url ? `\u001b]8;;${url}\u001b\\${text}\u001b]8;;\u001b\\` : text);
 
   const labelWidth = Math.max("Skills".length, ...data.links.map((l) => l.label.length));
   const row = (label, value) => `${accent(label.padEnd(labelWidth))}  ${value}`;
@@ -59,9 +62,10 @@ export function render(data, { color = false, columns = Infinity } = {}) {
     "",
     ...data.tagline,
     "",
-    ...data.links.map((l) =>
-      row(l.label, /^https?:\/\//.test(l.value) ? underline(l.value) : l.value),
-    ),
+    ...data.links.map((l) => {
+      const url = l.href ?? (/^https?:\/\//.test(l.value) ? l.value : null);
+      return row(l.label, url ? link(underline(l.value), url) : l.value);
+    }),
     "",
     ...skillLines.map((l, i) => (i === 0 ? row("Skills", l) : continuation(l))),
   ];
