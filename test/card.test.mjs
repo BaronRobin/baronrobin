@@ -11,11 +11,12 @@ const run = (args, env = {}) =>
 
 test("card contains every piece of content", () => {
   const out = stripAnsi(render(card));
-  for (const text of [card.name, card.title, card.location, ...card.tagline, ...card.skills]) {
+  for (const text of [card.name, card.title, card.location, ...card.tagline, ...card.skills, ...card.now.flatMap((r) => [r.label, r.value])]) {
     assert.ok(out.includes(text), `missing: ${text}`);
   }
   for (const link of card.links) {
-    assert.ok(out.includes(link.label) && out.includes(link.value), `missing link: ${link.label}`);
+    assert.ok(out.includes(link.label) && out.includes(link.value), `missing link: ${link.value}`);
+    if (link.note) assert.ok(out.includes(link.note), `missing note: ${link.note}`);
   }
 });
 
@@ -34,7 +35,7 @@ test("colour off produces no escape codes, colour on produces some", () => {
 
 test("narrow terminal drops the box", () => {
   const out = render(card, { columns: 20 });
-  assert.ok(!out.includes("╭"));
+  assert.ok(!out.includes("╭") && !out.includes("ooO"));
   assert.ok(out.includes(card.name));
 });
 
@@ -76,4 +77,11 @@ test("every link is an OSC 8 hyperlink with colour on, and none with colour off"
     assert.ok(on.includes(`\u001b]8;;${url}\u001b\\`), `missing link for ${l.label}`);
   }
   assert.ok(!render(card, { color: false }).includes("\u001b]8;;"));
+});
+
+test("the boulderer holds the top edge and the skyline stands on the bottom one", () => {
+  const lines = stripAnsi(render(card)).split("\n");
+  assert.ok(lines.find((l) => l.startsWith("╭")).includes("ooO\\_/Ooo"));
+  const bottom = lines.findIndex((l) => l.startsWith("╰"));
+  assert.ok(lines[bottom - 1].includes("|:::|"), "the Rathaus reaches the ground");
 });
