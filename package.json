@@ -23,7 +23,8 @@
   },
   "scripts": {
     "start": "node bin/cli.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "page": "node scripts/page.mjs"
   },
   "keywords": [
     "portfolio",
