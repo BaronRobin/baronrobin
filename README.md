@@ -1,5 +1,5 @@
 ```sh
-curl -sL baronrobin.com/card.txt
+curl card.baronrobin.com
 ```
 
 ```
