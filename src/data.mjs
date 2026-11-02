@@ -19,7 +19,6 @@ export const card = {
     { label: "Web", value: "https://baronrobin.com" },
     { label: "GitHub", value: "https://github.com/BaronRobin" },
     { label: "LinkedIn", value: "https://www.linkedin.com/in/baron-robin" },
-    { label: "Email", value: "robinbaron@icloud.com", href: "mailto:robinbaron@icloud.com" },
     // Rows with the same label share it; the note says what each account is.
     { label: "Instagram", value: "@stuffmadebyrob", href: "https://www.instagram.com/stuffmadebyrob/", note: "things I make" },
     { label: "Instagram", value: "@phtorob", href: "https://www.instagram.com/phtorob/", note: "photos" },
